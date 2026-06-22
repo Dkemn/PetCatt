@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="h-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PetCat</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PetCat.styles.css" asp-append-version="true" />
+</head>
+<body class="d-flex flex-column h-100 bg-light">
+
+    <!-- Barra de Navegación Limpia y Moderna -->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom shadow-sm py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold d-flex align-items-center gap-2" asp-area="" asp-page="/Index">
+                    🐾 <span class="text-info">Pet</span>Cat
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav ms-auto gap-1 mt-2 mt-sm-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-light-50 px-3 rounded-pill hover-nav" asp-area="" asp-page="/Index">🏠 Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light-50 px-3 rounded-pill hover-nav" asp-area="" asp-page="/MascotaPages/Index">🐱 Mascotas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light-50 px-3 rounded-pill hover-nav" asp-area="" asp-page="/VacunaPages/Index">💉 Vacunas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light-50 px-3 rounded-pill hover-nav" asp-area="" asp-page="/Privacy">🔒 Privacidad</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenedor Principal Ajustado Dinámicamente -->
+    <div class="container flex-shrink-0 my-4">
+        <main role="main" class="pb-5">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Pie de página siempre fijo al fondo gracias a Flexbox -->
+    <footer class="footer mt-auto py-3 bg-white border-top text-muted shadow-sm">
+        <div class="container text-center text-sm-start d-flex flex-column flex-sm-row justify-content-between gap-2">
+            <span>&copy; 2026 - <strong class="text-dark">PetCat</strong> - Todos los derechos reservados.</span>
+            <div>
+                <a asp-area="" asp-page="/Privacy" class="text-decoration-none text-secondary hover-link">Política de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<!-- ESTILOS EXCLUSIVOS PARA AJUSTAR LA INTERFAZ GENERAL -->
+<style>
+    /* Efecto interactivo sobre los enlaces de navegación */
+    .hover-nav {
+        transition: all 0.2s ease-in-out;
+    }
+
+        .hover-nav:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #0dcaf0 !important; /* Resalta en celeste clínico */
+        }
+
+    /* Enlaces pequeños del footer */
+    .hover-link:hover {
+        color: #0d6efd !important;
+        text-decoration: underline !important;
+    }
+
+    /* Corrige y limpia la etiqueta sobrante que generaba solapamientos */
+    .navbar-collapse {
+        z-index: 1050;
+    }
+</style>

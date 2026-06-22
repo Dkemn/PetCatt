@@ -1,0 +1,103 @@
+﻿@page
+@model PetCat.Pages.VacunaPages.DetailsModel
+@{
+    ViewData["Title"] = "Detalle de Vacunación";
+}
+
+<div class="container my-5 details-vaccine-container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-lg border-0 rounded-3 vaccine-details-card">
+                <div class="card-header bg-dark text-white text-center py-4 rounded-top-3 position-relative">
+                    <span class="fs-1 d-block mb-1">🧾</span>
+                    <h3 class="m-0 fw-bold text-info">Comprobante de Vacuna</h3>
+                    <p class="m-0 small text-muted opacity-75">Registro oficial del historial veterinario</p>
+                </div>
+
+                <div class="card-body p-4 p-sm-5 bg-white">
+
+                    <div class="text-center mb-4 pb-3 border-bottom">
+                        <span class="fs-4 text-secondary d-block">Paciente</span>
+                        <h4 class="fw-bold text-dark m-0">🐶 @Model.Vacuna.Mascota.Nombre</h4>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-12 text-center bg-light rounded-3 py-3 border">
+                            <small class="text-muted d-block text-uppercase fw-semibold tracking-wider">Medicamento / Vacuna</small>
+                            <span class="fs-4 fw-bold text-primary">🧪 @Html.DisplayFor(model => model.Vacuna.Nombre)</span>
+                        </div>
+
+                        <div class="col-6 border-end text-center">
+                            <small class="text-muted d-block fw-semibold mb-1">Fecha de Aplicación</small>
+                            <span class="fs-6 fw-medium text-dark">📅 @Html.DisplayFor(model => model.Vacuna.FechaAplicacion)</span>
+                        </div>
+
+                        <div class="col-6 text-center">
+                            <small class="text-muted d-block fw-semibold mb-1">Próximo Refuerzo</small>
+                            <span class="badge bg-warning text-dark px-2 py-1 fs-7 mt-1">
+                                🗓️ @Html.DisplayFor(model => model.Vacuna.FechaProximaDosis)
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 mt-5">
+                        <a asp-page="./Edit" asp-route-id="@Model.Vacuna.Id" class="btn btn-primary btn-lg fw-bold shadow-sm">
+                            ✏️ Editar este Registro
+                        </a>
+                        <a asp-page="./Index" class="btn btn-outline-secondary py-2 mt-1">
+                            📋 Volver al Historial General
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-page="/Index" class="text-decoration-none text-muted small">← Volver al Panel Principal</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Entrada animada para el comprobante */
+    .details-vaccine-container {
+        animation: fadeInDetailsVaccine 0.4s ease-out;
+    }
+
+    /* Diseño de la tarjeta de certificado */
+    .vaccine-details-card {
+        border-radius: 12px !important;
+        overflow: hidden;
+    }
+
+    .rounded-top-3 {
+        border-top-left-radius: 12px !important;
+        border-top-right-radius: 12px !important;
+    }
+
+    /* Ajuste para separar texto en títulos pequeños */
+    .tracking-wider {
+        letter-spacing: 0.5px;
+        font-size: 0.75rem;
+    }
+
+    /* Redefinición del badge de alerta para resaltar la fecha */
+    .fs-7 {
+        font-size: 0.9rem;
+    }
+
+    /* Doble @@ para que Razor no intente procesar la animación en C# */
+    @@keyframes fadeInDetailsVaccine {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

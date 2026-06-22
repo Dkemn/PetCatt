@@ -1,0 +1,128 @@
+﻿@page
+@model PetCat.Pages.VacunaPages.EditModel
+@{
+    ViewData["Title"] = "Editar Registro de Vacuna";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-lg border-0 rounded-3 vaccine-card">
+                <div class="card-header bg-primary text-white text-center py-4 rounded-top-3">
+                    <h2 class="m-0 fw-bold">✏️ Editar Vacunación</h2>
+                    <p class="m-0 small opacity-75">Modifica los datos de la dosis registrada</p>
+                </div>
+
+                <div class="card-body p-4 p-sm-5 bg-white">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <input type="hidden" asp-for="Vacuna.Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="Vacuna.MascotaId" class="form-label fw-semibold text-dark">Paciente / Mascota <span class="text-danger">*</span></label>
+                            <select asp-for="Vacuna.MascotaId" class="form-select custom-input" asp-items="ViewBag.MascotaId" aria-required="true">
+                            </select>
+                            <span asp-validation-for="Vacuna.MascotaId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Vacuna.Nombre" class="form-label fw-semibold text-dark">Nombre de la Vacuna <span class="text-danger">*</span></label>
+                            <input asp-for="Vacuna.Nombre" class="form-control custom-input" aria-required="true" />
+                            <span asp-validation-for="Vacuna.Nombre" class="text-danger small"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 mb-4">
+                                <label asp-for="Vacuna.FechaAplicacion" class="form-label fw-semibold text-dark">Fecha Aplicación <span class="text-danger">*</span></label>
+                                <input asp-for="Vacuna.FechaAplicacion" class="form-control custom-input" type="date" aria-required="true" />
+                                <span asp-validation-for="Vacuna.FechaAplicacion" class="text-danger small"></span>
+                            </div>
+                            <div class="col-sm-6 mb-4">
+                                <label asp-for="Vacuna.FechaProximaDosis" class="form-label fw-semibold text-dark">Próxima Dosis <span class="text-danger">*</span></label>
+                                <input asp-for="Vacuna.FechaProximaDosis" class="form-control custom-input" type="date" aria-required="true" />
+                                <span asp-validation-for="Vacuna.FechaProximaDosis" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm py-3 btn-submit">
+                                Guardar Cambios 💾
+                            </button>
+                            <a asp-page="./Index" class="btn btn-light btn-sm text-secondary border mt-2">
+                                📋 Cancelar y Volver
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-page="/Index" class="text-decoration-none text-muted small">← Volver al Panel Principal</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    /* Animación de entrada para la tarjeta */
+    .vaccine-card {
+        animation: fadeInEditVaccineForm 0.4s ease-out;
+        border-radius: 12px !important;
+        overflow: hidden;
+    }
+
+    /* Bordes superiores de la tarjeta */
+    .rounded-top-3 {
+        border-top-left-radius: 12px !important;
+        border-top-right-radius: 12px !important;
+    }
+
+    /* Estilo interactivo para las cajas de texto y selects */
+    .custom-input {
+        border: 2px solid #e0e0e0;
+        transition: all 0.2s ease-in-out;
+        border-radius: 8px;
+    }
+
+        .custom-input:focus {
+            border-color: #0d6efd !important; /* Azul primario */
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15) !important;
+            background-color: #f8faff;
+        }
+
+    /* Efecto hover en el botón principal */
+    .btn-submit {
+        transition: transform 0.1s ease, background-color 0.2s;
+    }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            background-color: #0b5ed7 !important;
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+    /* El truco del doble @@ para escapar el motor Razor */
+    @@keyframes fadeInEditVaccineForm {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

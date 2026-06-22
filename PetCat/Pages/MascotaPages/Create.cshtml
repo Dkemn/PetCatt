@@ -1,0 +1,134 @@
+﻿@page
+@model PetCat.Pages.MascotaPages.CreateModel
+@{
+    ViewData["Title"] = "Registrar Mascota";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-lg border-0 rounded-3 pet-card">
+                <div class="card-header bg-success text-white text-center py-4 rounded-top-3">
+                    <h2 class="m-0 fw-bold">🐾 Registrar Nueva Mascota</h2>
+                    <p class="m-0 small opacity-75">Completa los datos del nuevo paciente</p>
+                </div>
+
+                <div class="card-body p-4 p-sm-5 bg-white">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Mascota.Nombre" class="form-label fw-semibold text-dark">Nombre de la Mascota</label>
+                            <input asp-for="Mascota.Nombre" class="form-control form-control-lg custom-input" placeholder="Ej: Max, Luna..." />
+                            <span asp-validation-for="Mascota.Nombre" class="text-danger small"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <label asp-for="Mascota.Especie" class="form-label fw-semibold text-dark">Especie</label>
+                                <input asp-for="Mascota.Especie" class="form-control custom-input" placeholder="Ej: Perro, Gato..." />
+                                <span asp-validation-for="Mascota.Especie" class="text-danger small"></span>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <label asp-for="Mascota.Raza" class="form-label fw-semibold text-dark">Raza</label>
+                                <input asp-for="Mascota.Raza" class="form-control custom-input" placeholder="Ej: Labrador, Persa..." />
+                                <span asp-validation-for="Mascota.Raza" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 mb-4">
+                                <label asp-for="Mascota.FechaNacimiento" class="form-label fw-semibold text-dark">Fecha de Nacimiento</label>
+                                <input asp-for="Mascota.FechaNacimiento" class="form-control custom-input" type="date" />
+                                <span asp-validation-for="Mascota.FechaNacimiento" class="text-danger small"></span>
+                            </div>
+                            <div class="col-sm-6 mb-4">
+                                <label asp-for="Mascota.Sexo" class="form-label fw-semibold text-dark">Sexo</label>
+                                <select asp-for="Mascota.Sexo" class="form-select custom-input" asp-items="Html.GetEnumSelectList<SexoMascota>()">
+                                    <option value="" selected disabled>Selecciona...</option>
+                                </select>
+                                <span asp-validation-for="Mascota.Sexo" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg fw-bold shadow-sm py-3 btn-submit">
+                                Guardar Mascota 💾
+                            </button>
+                            <a asp-page="./Index" class="btn btn-light btn-sm text-secondary border mt-2">
+                                📋 Volver al Listado
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-page="/Index" class="text-decoration-none text-muted small">← Volver al Panel Principal</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    /* Animación de entrada para la tarjeta */
+    .pet-card {
+        animation: fadeInForm 0.4s ease-out;
+        border-radius: 12px !important;
+        overflow: hidden;
+    }
+
+    /* Bordes superiores de la tarjeta */
+    .rounded-top-3 {
+        border-top-left-radius: 12px !important;
+        border-top-right-radius: 12px !important;
+    }
+
+    /* Estilo interactivo para las cajas de texto */
+    .custom-input {
+        border: 2px solid #e0e0e0;
+        transition: all 0.2s ease-in-out;
+        border-radius: 8px;
+    }
+
+        .custom-input:focus {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.15) !important;
+            background-color: #f8fffb;
+        }
+
+    /* Efecto hover en el botón principal */
+    .btn-submit {
+        transition: transform 0.1s ease, background-color 0.2s;
+    }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            background-color: #146c43 !important;
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+    /* El truco del doble @@ para escapar el motor Razor */
+    @@keyframes fadeInForm {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

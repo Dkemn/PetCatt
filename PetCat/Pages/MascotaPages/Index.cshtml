@@ -1,0 +1,138 @@
+﻿@page
+@model PetCat.Pages.MascotaPages.IndexModel
+@{
+    ViewData["Title"] = "Listado de Mascotas";
+}
+
+<div class="container my-5 listado-container">
+    
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center mb-4 gap-3">
+        <div>
+            <h1 class="display-5 fw-bold text-success m-0">🐾 Pacientes Registrados</h1>
+            <p class="text-muted m-0">Administra y gestiona el historial de las mascotas.</p>
+        </div>
+        <a asp-page="Create" class="btn btn-success btn-lg fw-semibold shadow-sm animate-pulse">
+            ➕ Registrar Nueva Mascota
+        </a>
+    </div>
+
+    <div class="card shadow-lg border-0 rounded-3 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 custom-table">
+                    <thead class="table-success text-dark fw-bold">
+                        <tr>
+                            <th class="ps-4 py-3">@Html.DisplayNameFor(model => model.Mascota[0].Nombre)</th>
+                            <th class="py-3">@Html.DisplayNameFor(model => model.Mascota[0].Especie)</th>
+                            <th class="py-3">@Html.DisplayNameFor(model => model.Mascota[0].Raza)</th>
+                            <th class="py-3">@Html.DisplayNameFor(model => model.Mascota[0].FechaNacimiento)</th>
+                            <th class="py-3">@Html.DisplayNameFor(model => model.Mascota[0].Sexo)</th>
+                            <th class="text-center pe-4 py-3">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.Mascota.Any())
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-muted">
+                                    <span class="fs-2 d-block mb-2">🤷‍♂️</span>
+                                    No hay mascotas registradas todavía.
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var item in Model.Mascota)
+                            {
+                                <tr>
+                                    <td class="ps-4 fw-bold text-dark">
+                                        🐶 @Html.DisplayFor(model => item.Nombre)
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border px-2 py-1">
+                                            @Html.DisplayFor(model => item.Especie)
+                                        </span>
+                                    </td>
+                                    <td class="text-secondary">
+                                        @Html.DisplayFor(model => item.Raza)
+                                    </td>
+                                    <td class="text-secondary">
+                                        @Html.DisplayFor(model => item.FechaNacimiento)
+                                    </td>
+                                    <td>
+                                        <span class="fw-semibold">
+                                            @Html.DisplayFor(model => item.Sexo)
+                                        </span>
+                                    </td>
+                                    <td class="text-center pe-4">
+                                        <div class="btn-group btn-group-sm shadow-sm" role="group">
+                                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-outline-primary px-3" title="Editar">
+                                                ✏️ Editar
+                                            </a>
+                                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-outline-info px-3 text-dark" title="Detalles">
+                                                🔍 Historial
+                                            </a>
+                                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-outline-danger px-3" title="Eliminar">
+                                                ❌ Borrar
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-start mt-4">
+        <a asp-page="/Index" class="text-decoration-none text-muted small">← Volver al Panel Principal</a>
+    </div>
+
+</div>
+
+<style>
+    /* Animación de entrada suave para el listado */
+    .listado-container {
+        animation: fadeInList 0.4s ease-out;
+    }
+
+    /* Personalización interna de la tabla */
+    .custom-table tbody tr {
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    /* Efecto hover suave al pasar el mouse por las filas */
+    .custom-table tbody tr:hover {
+        background-color: #f4fbf7 !important;
+    }
+
+    /* Redondear botones de acción extremos */
+    .btn-group .btn:first-child {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+    }
+    .btn-group .btn:last-child {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+    /* Animación para el botón "Registrar" */
+    .animate-pulse:hover {
+        transform: scale(1.02);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    /* Doble @@ para escapar el motor Razor de ASP.NET Core */
+    @@keyframes fadeInList {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

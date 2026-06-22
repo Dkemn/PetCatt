@@ -1,0 +1,120 @@
+﻿@page
+@model PetCat.Pages.MascotaPages.DeleteModel
+
+@{
+    ViewData["Title"] = "Eliminar Mascota";
+}
+
+<div class="container my-5 delete-container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-lg border-0 rounded-3 pet-delete-card">
+                <div class="card-header bg-danger text-white text-center py-4 rounded-top-3">
+                    <span class="fs-1 d-block mb-1">⚠️</span>
+                    <h3 class="m-0 fw-bold">¿Eliminar este registro?</h3>
+                    <p class="m-0 small opacity-75">Esta acción no se puede deshacer y borrará los datos asociados.</p>
+                </div>
+
+                <div class="card-body p-4 p-sm-5 bg-white">
+                    <h5 class="text-secondary fw-semibold border-bottom pb-2 mb-3">Datos del Paciente</h5>
+
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <small class="text-muted d-block fw-semibold">@Html.DisplayNameFor(model => model.Mascota.Nombre)</small>
+                            <span class="fs-5 fw-bold text-dark">🐶 @Html.DisplayFor(model => model.Mascota.Nombre)</span>
+                        </div>
+
+                        <div class="col-6">
+                            <small class="text-muted d-block fw-semibold">@Html.DisplayNameFor(model => model.Mascota.Especie)</small>
+                            <span class="text-dark">@Html.DisplayFor(model => model.Mascota.Especie)</span>
+                        </div>
+
+                        <div class="col-6">
+                            <small class="text-muted d-block fw-semibold">@Html.DisplayNameFor(model => model.Mascota.Raza)</small>
+                            <span class="text-dark">@Html.DisplayFor(model => model.Mascota.Raza)</span>
+                        </div>
+
+                        <div class="col-6">
+                            <small class="text-muted d-block fw-semibold">@Html.DisplayNameFor(model => model.Mascota.Sexo)</small>
+                            <span class="fw-semibold text-dark">@Html.DisplayFor(model => model.Mascota.Sexo)</span>
+                        </div>
+
+                        <div class="col-12">
+                            <small class="text-muted d-block fw-semibold">@Html.DisplayNameFor(model => model.Mascota.FechaNacimiento)</small>
+                            <span class="text-dark">📅 @Html.DisplayFor(model => model.Mascota.FechaNacimiento)</span>
+                        </div>
+
+                        <div class="col-12 border-top pt-2 mt-3">
+                            <small class="text-muted d-block fw-semibold">@Html.DisplayNameFor(model => model.Mascota.Vacunas)</small>
+                            <span class="text-secondary small">@Html.DisplayFor(model => model.Mascota.Vacunas)</span>
+                        </div>
+                    </div>
+
+                    <form method="post" class="mt-5">
+                        <input type="hidden" asp-for="Mascota.Id" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger btn-lg fw-bold shadow-sm py-3 btn-delete">
+                                Sí, Eliminar Definitivamente 🗑️
+                            </button>
+                            <a asp-page="./Index" class="btn btn-light text-secondary border py-2">
+                                Cancelar y Regresar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-page="/Index" class="text-decoration-none text-muted small">← Volver al Panel Principal</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Animación de entrada suave para la pantalla de borrado */
+    .delete-container {
+        animation: fadeInDelete 0.4s ease-out;
+    }
+
+    /* Redondeado del contenedor */
+    .pet-delete-card {
+        border-radius: 12px !important;
+        overflow: hidden;
+    }
+
+    .rounded-top-3 {
+        border-top-left-radius: 12px !important;
+        border-top-right-radius: 12px !important;
+    }
+
+    /* Efectos dinámicos en el botón de borrar */
+    .btn-delete {
+        transition: transform 0.1s ease, background-color 0.2s;
+    }
+
+        .btn-delete:hover {
+            transform: translateY(-1px);
+            background-color: #bb2d3b !important; /* Rojo más oscuro */
+        }
+
+        .btn-delete:active {
+            transform: translateY(1px);
+        }
+
+    /* Doble @@ para escapar el motor Razor de ASP.NET Core */
+    @@keyframes fadeInDelete {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

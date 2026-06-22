@@ -1,0 +1,111 @@
+﻿@page
+@model PetCat.Pages.VacunaPages.DeleteModel
+@{
+    ViewData["Title"] = "Eliminar Registro de Vacuna";
+}
+
+<div class="container my-5 delete-container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-lg border-0 rounded-3 vaccine-delete-card">
+                <div class="card-header bg-danger text-white text-center py-4 rounded-top-3">
+                    <span class="fs-1 d-block mb-1">⚠️</span>
+                    <h3 class="m-0 fw-bold">¿Eliminar esta vacuna?</h3>
+                    <p class="m-0 small opacity-75">Esta acción quitará de forma permanente la dosis del historial clínico.</p>
+                </div>
+
+                <div class="card-body p-4 p-sm-5 bg-white">
+                    <h5 class="text-secondary fw-semibold border-bottom pb-2 mb-3">Detalle del Registro</h5>
+
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <small class="text-muted d-block fw-semibold">Paciente / Mascota</small>
+                            <span class="fs-5 fw-bold text-dark">🐶 @Model.Vacuna.Mascota.Nombre</span>
+                        </div>
+
+                        <div class="col-12">
+                            <small class="text-muted d-block fw-semibold">@Html.DisplayNameFor(model => model.Vacuna.Nombre)</small>
+                            <span class="text-dark fw-semibold text-primary">🧪 @Html.DisplayFor(model => model.Vacuna.Nombre)</span>
+                        </div>
+
+                        <div class="col-6">
+                            <small class="text-muted d-block fw-semibold">@Html.DisplayNameFor(model => model.Vacuna.FechaAplicacion)</small>
+                            <span class="text-dark">📅 @Html.DisplayFor(model => model.Vacuna.FechaAplicacion)</span>
+                        </div>
+
+                        <div class="col-6">
+                            <small class="text-muted d-block fw-semibold">@Html.DisplayNameFor(model => model.Vacuna.FechaProximaDosis)</small>
+                            <span class="badge bg-warning text-dark px-2 py-1 mt-1">
+                                🗓️ @Html.DisplayFor(model => model.Vacuna.FechaProximaDosis)
+                            </span>
+                        </div>
+                    </div>
+
+                    <form method="post" class="mt-5">
+                        <input type="hidden" asp-for="Vacuna.Id" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger btn-lg fw-bold shadow-sm py-3 btn-delete">
+                                Sí, Eliminar Registro 🗑️
+                            </button>
+                            <a asp-page="./Index" class="btn btn-light text-secondary border py-2">
+                                Cancelar y Regresar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-page="/Index" class="text-decoration-none text-muted small">← Volver al Panel Principal</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Animación de entrada suave para la pantalla de borrado */
+    .delete-container {
+        animation: fadeInDeleteVaccine 0.4s ease-out;
+    }
+
+    /* Redondeado del contenedor */
+    .vaccine-delete-card {
+        border-radius: 12px !important;
+        overflow: hidden;
+    }
+
+    .rounded-top-3 {
+        border-top-left-radius: 12px !important;
+        border-top-right-radius: 12px !important;
+    }
+
+    /* Efectos dinámicos en el botón de borrar */
+    .btn-delete {
+        transition: transform 0.1s ease, background-color 0.2s;
+    }
+
+        .btn-delete:hover {
+            transform: translateY(-1px);
+            background-color: #bb2d3b !important; /* Rojo oscuro de Bootstrap */
+        }
+
+        .btn-delete:active {
+            transform: translateY(1px);
+        }
+
+    /* Doble @@ para escapar el motor Razor de ASP.NET Core */
+    @@keyframes fadeInDeleteVaccine {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
